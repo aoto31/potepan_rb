@@ -20,12 +20,17 @@ if memo_type.eql?(1)
 elsif memo_type.eql?(2)
     puts "編集したいファイル名を入力してください"
     file_name = gets.chomp
-    puts "編集内容を記入してください"
-    puts "完了後、Ctrl＋Dを押します"
+    if (File.exist?("./#{file_name}.csv"))
+        puts "編集内容を記入してください"
+        puts "完了後、Ctrl＋Dを押します"
 #    memo_type = $stdin.read
-    memo = $stdin.read
-    CSV.open("#{file_name}.csv","a") do |file|
-    file << [memo]
-end
+        memo = $stdin.read
+        CSV.open("#{file_name}.csv","a") do |file|
+        file << [memo]
+        end
+    else
+        puts "ファイルが存在しないため処理を終了します。"
+    end
+        
 end
     
